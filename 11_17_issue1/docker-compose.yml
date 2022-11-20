@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  db:
+    restart: unless-stopped
+    image: mysql:8
+    environment:
+      - MYSQL_DATABASE=take_out
+      - MYSQL_USER=deploy
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=root_password
+    ports:
+      - 3306:3306
+    volumes:
+      - ./tmp/db/data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=deploy
+      - PMA_PASSWORD=password
+    links:
+      - db
+    ports:
+      - 8080:80
+    volumes:
+      - ./tmp/phpmyadmin/sessions:/sessions
