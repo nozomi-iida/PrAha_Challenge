@@ -1,0 +1,4 @@
+CREATE TABLE prices (
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Primary Key',
+    price INT NOT NULL DEFAULT 0
+)
