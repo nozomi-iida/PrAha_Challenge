@@ -33,3 +33,9 @@ ON channel_user.user_id = user.id
 WHERE workspace.name = "オールナイトニッポン" AND user.nickname = "若林";
 
 # 2. チャンネルのメッセージ、スレッドから「ゲスト」が含まれるメッセージ、スレッドを取得する
+SELECT
+  *
+FROM Message message
+INNER JOIN Channel channel
+ON channel.id = message.channel_id
+WHERE message.content LIKE "%ゲスト%" AND (channel.name = "General" OR channel.name = "若林トーク確認");

@@ -41,15 +41,15 @@ VALUES(@wakabayashi_id, @general_id),
 (@wakabayashi_id, @wakabayashi_talk_id);
 
 INSERT IGNORE INTO `Message`(content, user_id, channel_id)
-VALUES("明日も3時からお願いします", @sakuma_id, @general_id), ("明日のゲストが変更しました", @kasuga_id, @channel_id);
+VALUES("明日も3時からお願いします", @sakuma_id, @general_id), ("明日のゲストが変更しました", @kasuga_id, @general_id);
 
 SELECT @message_id := id FROM `Message` WHERE content = "明日のゲストが変更しました";
-INSERT IGNORE INTO `Thread`(content, user_id, message_id)
-VALUES("ゲスト誰になるんですか？", @wakabayashi_id, @message_id), ("あばれる君です", @kasuga_id, @message_id);
+INSERT IGNORE INTO `Message`(content, user_id, channel_id, parent_message_id)
+VALUES("ゲスト誰になるんですか？", @wakabayashi_id, @general_id, @message_id), ("あばれる君です", @kasuga_id, @general_id, @message_id);
 
 
 INSERT IGNORE INTO `Message`(content, user_id, channel_id)
 VALUES("今日のトーク準備できてますか?", @sakuma_id, @wakabayashi_talk_id);
 SELECT @message_id := id FROM `Message` WHERE content = "今日のトーク準備できてますか?";
-INSERT IGNORE INTO `Thread`(content, user_id, message_id)
-VALUES("まだ準備できてないです。。。", @wakabayashi_id, @message_id), ("頑張ってエピソード探してください！", @sakuma_id, @message_id)
+INSERT IGNORE INTO `Message`(content, user_id, channel_id, parent_message_id)
+VALUES("まだ準備できてないです。。。", @wakabayashi_id, @wakabayashi_talk_id, @message_id), ("頑張ってエピソード探してください！", @sakuma_id, @wakabayashi_talk_id, @message_id)

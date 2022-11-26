@@ -15,6 +15,7 @@ entity message {
     updated_at
     channel_id(fk)
     user_id(fk)
+    parent_message_id(fk)
 }
 
 entity user_workspace {
@@ -39,15 +40,6 @@ entity user {
     email
 }
 
-entity thread {
-    * id(pk)
-    --
-    content
-    created_at
-    updated_at
-    message_id(fk)
-}
-
 entity channel {
     * id(pk)
     --
@@ -60,8 +52,6 @@ workspace ||--{ user_workspace
 user ||--{ channel_user
 channel ||--{ channel_user
 user ||--o{ message
-user ||--o{ thread
-message ||--{ thread
 workspace ||--{ channel
 
 @enduml

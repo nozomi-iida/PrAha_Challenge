@@ -49,21 +49,11 @@ CREATE TABLE IF NOT EXISTS Message (
   updated_at timestamp default current_timestamp on update current_timestamp,
   user_id INT,
   channel_id INT NOT NULL,
+  parent_message_id INT,
   CONSTRAINT fk_user_message FOREIGN KEY (user_id)
   REFERENCES User(id),
   CONSTRAINT fk_channel_message FOREIGN KEY (channel_id)
-  REFERENCES Channel(id)
-);
-
-CREATE TABLE IF NOT EXISTS Thread (
-  id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  content VARCHAR(255) NOT NULL,
-  created_at datetime  default current_timestamp,
-  updated_at timestamp default current_timestamp on update current_timestamp,
-  user_id INT,
-  message_id INT NOT NULL,
-  CONSTRAINT fk_user_thread FOREIGN KEY (user_id)
-  REFERENCES User(id),
-  CONSTRAINT fk_message_thread FOREIGN KEY (message_id)
+  REFERENCES Channel(id),
+  CONSTRAINT fk_message FOREIGN KEY (parent_message_id)
   REFERENCES Message(id)
 );
