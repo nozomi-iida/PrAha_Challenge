@@ -1,0 +1,67 @@
+@startuml slack
+
+
+entity workspace {
+    * id(pk)
+    --
+    name
+}
+
+entity message {
+    * id(pk)
+    --
+    content
+    created_at
+    updated_at
+    channel_id(fk)
+    user_id(fk)
+}
+
+entity user_workspace {
+    * id(pk)
+    --
+    user_id(fk)
+    workspace_id(fk)
+}
+
+entity channel_user {
+    * id(pk)
+    --
+    channel_id(fk)
+    user_id(fk)
+}
+
+entity user {
+    * id(pk)
+    --
+    last_name
+    first_name
+    email
+}
+
+entity thread {
+    * id(pk)
+    --
+    content
+    created_at
+    updated_at
+    message_id(fk)
+}
+
+entity channel {
+    * id(pk)
+    --
+    name
+    workspace_id(fk)
+}
+
+user ||--{ user_workspace
+workspace ||--{ user_workspace
+user ||--{ channel_user
+channel ||--{ channel_user
+user ||--o{ message
+user ||--o{ thread
+message ||--{ thread
+workspace ||--{ channel
+
+@enduml
