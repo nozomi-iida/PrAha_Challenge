@@ -1,0 +1,30 @@
+@startuml esa_clone
+
+entity tasks {
+    * id(pk)
+    --
+    name
+    description
+    remind
+    isDone
+    creator_id(fk)
+}
+
+entity mentions {
+    * id(pk)
+    --
+    task_id(fk)
+    assign_id(fk)
+}
+
+entity users {
+    * id(pk)
+    --
+    slack_id
+}
+
+users o--o{ tasks
+users o--|{ mentions
+tasks o--|{ mentions
+
+@enduml 
