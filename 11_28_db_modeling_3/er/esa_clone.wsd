@@ -1,0 +1,41 @@
+@startuml esa_clone
+
+entity documents {
+    * id(pk)
+    --
+    name
+    content
+    order
+    created_at
+    user_id(fk)
+    document_id(fk)
+}
+
+entity directories {
+    * id(pk)
+    --
+    name
+    order
+    parent_directory_id(fk)
+}
+
+entity directory_paths {
+    * ancestor(pk, fk)
+    * desendant(pk, fk)
+    --
+    path_length
+}
+
+entity users {
+    * id(pk)
+    --
+    name
+    email
+}
+
+users ||--o{ documents
+users ||--o{ directories
+directories ||-- directory_paths 
+directories ||--o{ documents
+
+@enduml
