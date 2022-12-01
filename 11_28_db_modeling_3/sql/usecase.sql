@@ -1,5 +1,5 @@
 -- Active: 1668822633200@@127.0.0.1@3306@esa_clone
-SELECT @allnight_id := id FROM `directories` WHERE name = "オールナイトニッポン";
+SELECT @allnight_id := id FROM `directories` WHERE name = "若林トーク集";
 # オールナイトニッポンディレクトリ一覧を順番どおりに取得する
 SELECT
   directories.*,

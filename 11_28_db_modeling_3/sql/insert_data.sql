@@ -25,6 +25,7 @@ SELECT @two_week_id := id FROM `directories` WHERE name = "11月2週目トーク
 SELECT @three_week_id := id FROM `directories` WHERE name = "11月3週目トーク";
 INSERT IGNORE INTO `directory_paths`(ancestor, desendant, path_length)
 VALUES(@allnight_id, @allnight_id, 0),
+(@wakabayashi_talk_id, @wakabayashi_talk_id, 0),
 (@allnight_id, @wakabayashi_talk_id, 1),
 (@one_week_id, @one_week_id, 0),
 (@wakabayashi_talk_id, @one_week_id, 1),
