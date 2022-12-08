@@ -1,0 +1,27 @@
+@startuml blog
+
+entity users {
+  * id(pk)
+  --
+  username
+}
+
+entity articles {
+  * id(pk)
+  --
+  published_at
+}
+
+entity article_histories {
+  * id(pk)
+  --
+  title
+  body
+  article_id(fk)
+  author_id(fk)
+}
+
+users o--{ article_histories
+articles --{ article_histories  
+
+@enduml
